@@ -32,5 +32,5 @@ for nome_arquivo in os.listdir(caminho_imagens):
                 cpf_numeros = re.sub(r'\D', '', cpf)
                 cpfs_numeros.append(cpf_numeros)
             print(f"CPF(s) na imagem {caminho_arquivo} é: {cpfs_numeros}")
-            #str_cpfs = ",".join(cpfs_numeros)
-            #f.write(avisoLocal + str_cpfs + "\n")
+            str_cpfs = ",".join(cpfs_numeros)
+            f.write(avisoLocal + str_cpfs + "\n")
