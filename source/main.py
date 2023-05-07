@@ -4,7 +4,12 @@ import fnmatch
 import cv2
 import pytesseract
 from pdf2image import convert_from_path
+from config import connection
 
+#iniciando conexao com o banco
+cursor = connection.cursor()
+
+#caminhos
 caminho_imagens = r"C:\Users\Matheus\Documents\GitHub\Leitor_de_Arquivo\files"
 caminho_tesseract = r"C:\Program Files\Tesseract-OCR"
 pytesseract.pytesseract.tesseract_cmd = caminho_tesseract + r"\tesseract.exe"
@@ -31,6 +36,11 @@ for nome_arquivo in os.listdir(caminho_imagens):
                 for cpf in cpfs:
                     cpf_numeros = re.sub(r'\D', '', cpf)
                     cpfs_numeros.append(cpf_numeros)
-                print(f"CPF(s) na imagem {caminho_arquivo} é: {cpfs_numeros}")
-                #str_cpfs = ",".join(cpfs_numeros)
-                #f.write(avisoLocal + str_cpfs + "\n")
+                    #quardando informacao no banco
+                    qry_InsertCPFs = f'INSERT INTO documentos_tratados(CPF_DOCUMENTO) \
+                                       VALUES ({cpf_numeros})'
+                    cursor.execute(qry_InsertCPFs)  #executando query
+                    connection.commit()             #editando no banco
+
+cursor.close()  #finalizando a conexão
+connection.close() #finalizando a conexão
