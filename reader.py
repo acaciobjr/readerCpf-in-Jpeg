@@ -2,8 +2,6 @@ import pytesseract
 import cv2
 import os
 import re
-import cv2
-import pytesseract
 from pdf2image import convert_from_path
 
 # caminhos
