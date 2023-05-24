@@ -1,11 +1,11 @@
-import pytesseract
-import cv2
 import os
 import re
+import cv2
+import pytesseract
 from pdf2image import convert_from_path
 
 # caminhos
-caminho_imagens = r"C:\Users\Rose\Documents\Gteste"
+caminho_imagens = r"diretório onde estão as documentações em arquivos pdf e jpg"
 caminho_tesseract = r"C:\Program Files\Tesseract-OCR"
 pytesseract.pytesseract.tesseract_cmd = os.path.join(caminho_tesseract, "tesseract.exe")
 
@@ -17,10 +17,10 @@ def processar_texto(texto, caminho_arquivo, f):
 
     cpfs = re.findall(r'\d{3}\.\d{3}\.\d{3}-\d{2}', texto)
     RG = re.findall(r'\d{13}', texto)
-    print(RG)
+    #print(RG)
     cpfs_numeros = [re.sub(r'\D', '', cpf) for cpf in cpfs]
 
-    if cpfs_numeros:
+    if cpfs_numeros or RG:
         avisoLocal = f"CPF e RG no arquivo {caminho_arquivo} são: {cpfs_numeros} e {RG}"
         print(avisoLocal)
         str_cpfs = ",".join(cpfs_numeros)
