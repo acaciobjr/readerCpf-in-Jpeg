@@ -11,9 +11,6 @@ pytesseract.pytesseract.tesseract_cmd = os.path.join(caminho_tesseract, "tessera
 
 
 def processar_texto(texto, caminho_arquivo, f):
-    #if not texto:
-     #   print(f"Não foi possível identificar o texto no arquivo {caminho_arquivo}.")
-      #  return
     texto = texto.replace(" ", "")
     nasc = re.findall(r'\d{2}/\d{2}/\d{4}', texto)
     cpfs = re.findall(r'\d{3}\.\d{3}\.\d{3}-\d{2}', texto)
@@ -38,7 +35,6 @@ with open('texto.txt', 'w', encoding='utf-8') as f:
         extensao = os.path.splitext(nome_arquivo)[1].lower()
         caminho_arquivo = os.path.join(caminho_imagens, nome_arquivo)
         texto = ''
-        #if
         if extensao == '.pdf':
             imagens = convert_from_path(caminho_arquivo)
             for imagem in imagens:
