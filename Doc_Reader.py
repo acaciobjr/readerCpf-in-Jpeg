@@ -5,7 +5,7 @@ import pytesseract
 from pdf2image import convert_from_path
 
 # caminhos
-caminho_imagens = r"C:\Users\Rose\Documents\Gteste"
+caminho_imagens = r"diretório da imagem"
 caminho_tesseract = r"C:\Program Files\Tesseract-OCR"
 pytesseract.pytesseract.tesseract_cmd = os.path.join(caminho_tesseract, "tesseract.exe")
 
